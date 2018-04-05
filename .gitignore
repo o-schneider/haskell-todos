@@ -1,0 +1,6 @@
+.stack-work/
+haskell-es-todos.cabal
+*~
+.idea
+*.iml
+/out/
