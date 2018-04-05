@@ -18,6 +18,13 @@ spec = do
     it "create empty todos" $ do
       (getTodos empty) `shouldBe` []
 
-    it "add todos" $ do
-        let newTodo = todo "text" True
-        (getTodos . (add newTodo)) empty `shouldBe` [newTodo]
+    it "add todo" $ do
+      let newTodo = todo "id" "text" True
+      (getTodos . (add newTodo)) empty `shouldBe` [newTodo]
+
+    it "remove todo" $ do
+      let id = "id"
+          t = todo id "text" True
+          todos = add t empty
+      (getTodos . (delete id)) todos `shouldBe` []
+

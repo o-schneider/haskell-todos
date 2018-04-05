@@ -18,20 +18,20 @@ spec :: Spec
 spec = do
   describe "Todo" $ do
     it "creates todos" $ do
-      let text = "text"
+      let id = "id"
+          text = "text"
           completion = True
-          t = todo text completion
+          t = todo id text completion
+      getId t `shouldBe` id
       getText t `shouldBe` text
       isCompleted t `shouldBe` completion
 
     describe "JSON" $ do
       it "toJson" $ do
-        let json = encode $ todo "text" True
-        json `shouldBe` "{\"text\":\"text\",\"completed\":true}"
+        let json = encode $ todo "id" "text" True
+        json `shouldBe` "{\"text\":\"text\",\"identifier\":\"id\",\"completed\":true}"
 
       it "fromJson" $ do
-        let text = "text"
-            completion = True
-            json = "{\"text\":\"" ++ text ++ "\",\"completed\":true}"
+        let json = "{\"identifier\":\"id\",\"text\":\"text\",\"completed\":true}"
             decodedTodo = decode $ C.pack json
-        decodedTodo `shouldBe` Just (todo text completion)
+        decodedTodo `shouldBe` Just (todo "id" "text" True)
