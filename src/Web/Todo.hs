@@ -23,9 +23,9 @@ routes = do
     (\uuid (Todo.CreateTodoJSON t c) -> Todo.todo uuid t c) <$>
       (liftIO $ toString <$> nextRandom) <*>
       jsonData >>=
-      (\t ->
-         ((monadAppState . modify) $ (\s -> AppState (add t s)) . todoState) >>=
-         (\x -> json t))
+      (\newTodo ->
+         ((monadAppState . modify) $ (\s -> AppState (add newTodo s)) . todoState) >>=
+         (\x -> json newTodo))
 
   get "/todos" $ do
     c <- monadAppState $ gets $ (\s -> getTodos (todoState s))
