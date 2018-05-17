@@ -15,7 +15,7 @@ main :: IO ()
 main = hspec spec
 
 spec :: Spec
-spec = do
+spec =
   describe "Todo" $ do
     it "creates todos" $ do
       let id = "id"
@@ -25,13 +25,13 @@ spec = do
       getId t `shouldBe` id
       getText t `shouldBe` text
       isCompleted t `shouldBe` completion
-
     describe "JSON" $ do
       it "toJson" $ do
-        let json = encode $ todo "id" "text" True
-        json `shouldBe` "{\"text\":\"text\",\"identifier\":\"id\",\"completed\":true}"
-
+        let json = encode $   todo "id" "text" True
+        json `shouldBe`
+          "{\"text\":\"text\",\"identifier\":\"id\",\"completed\":true}"
       it "fromJson" $ do
-        let json = "{\"identifier\":\"id\",\"text\":\"text\",\"completed\":true}"
+        let json =
+              "{\"identifier\":\"id\",\"text\":\"text\",\"completed\":true}"
             decodedTodo = decode $ C.pack json
         decodedTodo `shouldBe` Just (todo "id" "text" True)

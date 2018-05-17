@@ -30,7 +30,7 @@ monadAppState :: MonadTrans t => MonadAppState a -> t MonadAppState a
 monadAppState = lift
 
 gets :: (AppState -> b) -> MonadAppState b
-gets f = ask >>= liftIO . readTVarIO >>= return . f
+gets f = f <$> (ask >>= (liftIO . readTVarIO))
 
 modify :: (AppState -> AppState) -> MonadAppState ()
 modify f = ask >>= liftIO . atomically . flip modifyTVar' f

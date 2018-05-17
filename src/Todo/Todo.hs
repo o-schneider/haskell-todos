@@ -3,8 +3,7 @@
 
 module Todo.Todo
   ( Todo
-  , CreateTodoJSON (..)
-  , todo
+  , CreateTodoJSON (..), todo
   , getId
   , getText
   , isCompleted

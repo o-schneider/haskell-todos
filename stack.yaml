@@ -1,6 +1,4 @@
-resolver: lts-11.3
-
 packages:
 - .
-
-allow-newer : true
+allow-newer: true
+resolver: lts-9.21

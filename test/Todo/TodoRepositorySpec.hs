@@ -13,18 +13,17 @@ main :: IO ()
 main = hspec spec
 
 spec :: Spec
-spec = do
+spec =
   describe "todos management" $ do
-    it "create empty todos" $ do
-      (getTodos empty) `shouldBe` []
+    it "create empty todos" $
+      getTodos empty `shouldBe` []
 
     it "add todo" $ do
       let newTodo = todo "id" "text" True
-      (getTodos . (add newTodo)) empty `shouldBe` [newTodo]
+      (getTodos . add newTodo) empty `shouldBe` [newTodo]
 
     it "remove todo" $ do
       let id = "id"
           t = todo id "text" True
           todos = add t empty
-      (getTodos . (delete id)) todos `shouldBe` []
-
+      (getTodos . delete id) todos `shouldBe` []

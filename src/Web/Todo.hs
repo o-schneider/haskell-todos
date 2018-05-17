@@ -19,14 +19,14 @@ import           Web.State
 
 routes :: ScottyT T.Text MonadAppState ()
 routes = do
-  post "/todos" $ do
+  post "/todos" $
     (\uuid (Todo.CreateTodoJSON t c) -> Todo.todo uuid t c) <$>
-      (liftIO $ toString <$> nextRandom) <*>
+      liftIO (toString <$> nextRandom) <*>
       jsonData >>=
       (\newTodo ->
-         ((monadAppState . modify) $ (\s -> AppState (add newTodo s)) . todoState) >>=
+         (monadAppState . modify) ((AppState  . add newTodo) . todoState) >>=
          (\x -> json newTodo))
 
   get "/todos" $ do
-    c <- monadAppState $ gets $ (\s -> getTodos (todoState s))
+    c <- monadAppState $ gets (getTodos .todoState)
     json c

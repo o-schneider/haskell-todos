@@ -1,3 +1,3 @@
-# Changelog for haskell-es-todos
+# Changelog for haskell-todos
 
 ## Unreleased changes

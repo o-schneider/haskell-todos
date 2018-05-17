@@ -20,4 +20,4 @@ add :: Todo -> Todos -> Todos
 add todo = Todos . (todo :) . getTodos
 
 delete :: String -> Todos -> Todos
-delete id todos = Todos $ [x | x <- getTodos todos, getId x /= id]
+delete id todos = Todos [x | x <- getTodos todos, getId x /= id]

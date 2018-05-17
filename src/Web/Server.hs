@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module Web.Server
   ( run
   ) where
@@ -19,9 +17,7 @@ type Port = Int
 run :: Port -> IO ()
 run p = do
   sync <- newTVarIO emptyState
-        -- Note that 'runM' is only called once, at startup.
   let runM m = runReaderT (runAppState m) sync
-        -- 'runActionToIO' is called once per action.
       runActionToIO = runM
 
   scottyT p runM routes

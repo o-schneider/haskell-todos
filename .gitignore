@@ -1,5 +1,5 @@
 .stack-work/
-haskell-es-todos.cabal
+haskell-todos.cabal
 *~
 .idea
 *.iml
