@@ -1,3 +1,3 @@
 # haskell-todos
 
-Simple REST app that handles todos and save them to the memory
+Simple REST app that handles todos and saves them to the memory
