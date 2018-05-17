@@ -16,14 +16,14 @@ spec :: Spec
 spec =
   describe "todos management" $ do
     it "create empty todos" $
-      getTodos empty `shouldBe` []
+      empty `shouldBe` []
 
     it "add todo" $ do
       let newTodo = todo "id" "text" True
-      (getTodos . add newTodo) empty `shouldBe` [newTodo]
+      add newTodo empty `shouldBe` [newTodo]
 
     it "remove todo" $ do
       let id = "id"
           t = todo id "text" True
           todos = add t empty
-      (getTodos . delete id) todos `shouldBe` []
+      delete id todos `shouldBe` []

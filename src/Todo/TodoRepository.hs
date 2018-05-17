@@ -1,6 +1,5 @@
 module Todo.TodoRepository
   ( Todos
-  , getTodos
   , empty
   , add
   , delete
@@ -9,15 +8,13 @@ module Todo.TodoRepository
 import qualified Data.List as L
 import           Todo.Todo
 
-newtype Todos = Todos
-  { getTodos :: [Todo]
-  }
+type Todos = [Todo]
 
 empty :: Todos
-empty = Todos []
+empty = []
 
 add :: Todo -> Todos -> Todos
-add todo = Todos . (todo :) . getTodos
+add t todos = t : todos
 
 delete :: String -> Todos -> Todos
-delete id todos = Todos [x | x <- getTodos todos, getId x /= id]
+delete id todos = [x | x <- todos, getId x /= id]
