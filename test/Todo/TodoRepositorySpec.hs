@@ -18,6 +18,19 @@ spec =
     it "create empty todos" $
       empty `shouldBe` []
 
+    it "get todos by id" $ do
+      let idToFind = "id1"
+          todo1 = todo idToFind "text" True
+          todo2 = todo "idToKeep" "text" True
+          todos = add todo1 (add todo2 empty)
+      get idToFind todos `shouldBe` Just todo1
+
+    it "get todos by id" $ do
+      let idToFind = "id1"
+          todo1 = todo "id2" "text" True
+          todos = add todo1 empty
+      get idToFind todos `shouldBe` Nothing
+
     it "add todo" $ do
       let newTodo = todo "id" "text" True
       add newTodo empty `shouldBe` [newTodo]

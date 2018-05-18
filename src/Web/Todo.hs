@@ -18,7 +18,7 @@ import           Web.State
 
 routes :: ScottyT T.Text MonadAppState ()
 routes = do
-  get "/todos" $
+  S.get "/todos" $
     monadAppState (gets todoState) >>= json
 
   post "/todos" $

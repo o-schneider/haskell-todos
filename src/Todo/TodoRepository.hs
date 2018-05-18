@@ -1,6 +1,7 @@
 module Todo.TodoRepository
   ( Todos
   , empty
+  , get
   , add
   , delete
   ) where
@@ -12,6 +13,11 @@ type Todos = [Todo]
 
 empty :: Todos
 empty = []
+
+get :: String -> Todos -> Maybe Todo
+get id todos = case xs of []    -> Nothing
+                          (x:_) -> Just x
+               where xs = [x | x <- todos, getId x == id]
 
 add :: Todo -> Todos -> Todos
 add t todos = t : todos
