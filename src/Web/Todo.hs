@@ -21,7 +21,11 @@ routes = do
   S.get "/todos" $
     monadAppState (gets todoState) >>= json
 
-  post "/todos" $
+  S.get "/todos/:id" $ do
+    id <- param "id"
+    monadAppState (gets (TodoRepository.get id . todoState)) >>= json
+
+  S.post "/todos" $
     (\uuid (Todo.CreateTodoJSON t c) -> Todo.todo uuid t c) <$>
     liftIO (toString <$> nextRandom) <*>
     jsonData >>=
